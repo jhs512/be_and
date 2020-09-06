@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/item_article__textViewId"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="번호"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/item_article__textViewTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="할일"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/item_article__buttonToGoDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="상세보기" />
+
+</LinearLayout>
