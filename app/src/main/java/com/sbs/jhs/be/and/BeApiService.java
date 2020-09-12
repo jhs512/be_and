@@ -2,6 +2,7 @@ package com.sbs.jhs.be.and;
 
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface BeApiService {
@@ -10,4 +11,7 @@ public interface BeApiService {
 
     @GET("/usr/article/getArticle")
     Observable<ResultData<BeApi__UsrArticle__getArticle__Body>> UsrArticle__getArticle(@Query("id") int id);
+
+    @POST("/usr/article/doDeleteArticle")
+    Observable<ResultData> UsrArticle__doDeleteArticle(@Query("id") int id);
 }
