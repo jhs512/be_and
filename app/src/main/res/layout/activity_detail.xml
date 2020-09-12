@@ -3,46 +3,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".DetailActivity">
+
+    <TextView
+        android:id="@+id/activity_detail__textViewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="번호"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+    <TextView
+        android:id="@+id/activity_detail__textViewRegDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="날짜"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+    <TextView
+        android:id="@+id/activity_detail__textViewTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="제목"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/activity_detail__textViewBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/activity_detail__textViewId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="번호"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-            <TextView
-                android:id="@+id/activity_detail__textViewRegDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="날짜"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-            <TextView
-                android:id="@+id/activity_detail__textViewTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="제목"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-            <TextView
-                android:id="@+id/activity_detail__textViewBody"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="내용"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-        </LinearLayout>
+            android:text="내용"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
     </ScrollView>
+
+    <Button
+        android:id="@+id/activity_detail__buttonDoDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="삭제" />
 
 </LinearLayout>
