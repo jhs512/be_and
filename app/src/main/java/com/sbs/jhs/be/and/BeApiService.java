@@ -19,4 +19,7 @@ public interface BeApiService {
 
     @POST("/usr/article/doAddArticle")
     Observable<ResultData<Map<String, Object>>> UsrArticle__doAddArticle(@Query("boardId") int boardId, @Query("title") String title, @Query("body") String body);
+
+    @POST("/usr/article/doModifyArticle")
+    Observable<ResultData<Map<String, Object>>> UsrArticle__doModifyArticle(@Query("id") int id, @Query("title") String title, @Query("body") String body);
 }

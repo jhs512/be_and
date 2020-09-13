@@ -4,27 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DetailActivity">
+    tools:context=".ModifyActivity">
 
     <TextView
-        android:id="@+id/activity_detail__textViewId"
+        android:id="@+id/activity_modify__textViewId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="번호"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
     <TextView
-        android:id="@+id/activity_detail__textViewRegDate"
+        android:id="@+id/activity_modify__textViewRegDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="날짜"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-    <TextView
-        android:id="@+id/activity_detail__textViewTitle"
+    <EditText
+        android:id="@+id/activity_modify__editTextTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="제목"
+        android:hint="제목"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
     <ScrollView
@@ -32,30 +32,19 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/activity_detail__textViewBody"
+        <EditText
+            android:id="@+id/activity_modify__editTextBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="내용"
+            android:hint="내용"
+            android:inputType="textMultiLine"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
     </ScrollView>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/activity_modify__buttonDoModify"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/activity_detail__buttonModify"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="수정" />
-
-        <Button
-            android:id="@+id/activity_detail__buttonDoDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="삭제" />
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:text="수정" />
 
 </LinearLayout>

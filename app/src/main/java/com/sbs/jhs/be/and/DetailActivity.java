@@ -25,6 +25,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView textViewTitle;
     private TextView textViewBody;
     private Button buttonDoDelete;
+    private Button buttonModify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +41,15 @@ public class DetailActivity extends AppCompatActivity {
         textViewTitle = findViewById(R.id.activity_detail__textViewTitle);
         textViewBody = findViewById(R.id.activity_detail__textViewBody);
         buttonDoDelete = findViewById(R.id.activity_detail__buttonDoDelete);
+        buttonModify = findViewById(R.id.activity_detail__buttonModify);
 
         BeApiService beApiService = App.getBeApiService();
+
+        buttonModify.setOnClickListener(view -> {
+            Intent intent = new Intent(DetailActivity.this, ModifyActivity.class);
+            intent.putExtra("id", id);
+            startActivity(intent);
+        });
 
         buttonDoDelete.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -63,7 +71,8 @@ public class DetailActivity extends AppCompatActivity {
                     Log.e(TAG, throwable.getMessage(), throwable);
                 }));
             });
-            builder.setNegativeButton("아니오", (dialog, viewId) -> {});
+            builder.setNegativeButton("아니오", (dialog, viewId) -> {
+            });
 
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
