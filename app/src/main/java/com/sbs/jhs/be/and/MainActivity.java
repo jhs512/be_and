@@ -30,11 +30,19 @@ public class MainActivity extends AppCompatActivity {
     private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
     private List<Article> articles;
     private RecyclerView1Adapter recyclerView1Adapter;
+    private Button btnAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setTitle("게시물 리스트");
+
+        btnAdd = findViewById(R.id.activity_main__btnAdd);
+        btnAdd.setOnClickListener(view -> {
+            startActivity(new Intent(MainActivity.this, AddActivity.class));
+        });
 
         articles = new ArrayList<>();
 

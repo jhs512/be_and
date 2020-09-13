@@ -37,6 +37,8 @@ public class DetailActivity extends AppCompatActivity {
 
         final int id = getIntent().getIntExtra("id", -1);
 
+        setTitle(id + "번 게시물");
+
         textViewId = findViewById(R.id.activity_detail__textViewId);
         textViewRegDate = findViewById(R.id.activity_detail__textViewRegDate);
         textViewTitle = findViewById(R.id.activity_detail__textViewTitle);

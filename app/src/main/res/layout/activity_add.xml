@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddActivity">
+
+    <EditText
+        android:id="@+id/activity_add__editTextTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="제목"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <EditText
+            android:id="@+id/activity_add__editTextBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="내용"
+            android:inputType="textMultiLine"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/activity_add__buttonDoAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="추가" />
+
+</LinearLayout>
