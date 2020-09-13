@@ -21,9 +21,6 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -46,13 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         articles = new ArrayList<>();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.78.101.245:8085")
-                .addConverterFactory(GsonConverterFactory.create()) // GSON 사용
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create()) // RX Java 사용
-                .build();
-
-        BeApiService beApiService = retrofit.create(BeApiService.class);
+        BeApiService beApiService = App.getBeApiService();
         Observable<ResultData<BeApi__UsrArticle__getArticles__Body>> observable__UsrArticle__getArticlesResultData = beApiService.UsrArticle__getArticles();
 
         mCompositeDisposable.add(observable__UsrArticle__getArticlesResultData.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(resultData -> {
