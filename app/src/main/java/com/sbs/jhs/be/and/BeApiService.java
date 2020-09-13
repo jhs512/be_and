@@ -1,5 +1,7 @@
 package com.sbs.jhs.be.and;
 
+import java.util.Map;
+
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -13,8 +15,8 @@ public interface BeApiService {
     Observable<ResultData<BeApi__UsrArticle__getArticle__Body>> UsrArticle__getArticle(@Query("id") int id);
 
     @POST("/usr/article/doDeleteArticle")
-    Observable<ResultData> UsrArticle__doDeleteArticle(@Query("id") int id);
+    Observable<ResultData<Map<String, Object>>> UsrArticle__doDeleteArticle(@Query("id") int id);
 
     @POST("/usr/article/doAddArticle")
-    Observable<ResultData> UsrArticle__doAddArticle(@Query("boardId") int boardId, @Query("title") String title, @Query("body") String body);
+    Observable<ResultData<Map<String, Object>>> UsrArticle__doAddArticle(@Query("boardId") int boardId, @Query("title") String title, @Query("body") String body);
 }

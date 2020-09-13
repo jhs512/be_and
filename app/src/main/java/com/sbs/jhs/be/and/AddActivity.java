@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Map;
+
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -52,10 +54,12 @@ public class AddActivity extends AppCompatActivity {
                 return;
             }
 
-            Observable<ResultData> observable__UsrArticle__doAddArticleResultData = beApiService.UsrArticle__doAddArticle(boardId, title, body);
+            Observable<ResultData<Map<String, Object>>> observable__UsrArticle__doAddArticleResultData = beApiService.UsrArticle__doAddArticle(boardId, title, body);
 
             mCompositeDisposable.add(observable__UsrArticle__doAddArticleResultData.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(resultData -> {
-                Toast.makeText(getApplicationContext(), "글이 생성되었습니다.", Toast.LENGTH_SHORT).show();
+                int id = Util.getAsInt(resultData.body.get("id"));
+
+                Toast.makeText(getApplicationContext(), id + "번 글이 생성되었습니다.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(AddActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
