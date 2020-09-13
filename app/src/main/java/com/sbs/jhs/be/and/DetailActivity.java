@@ -1,6 +1,7 @@
 package com.sbs.jhs.be.and;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -60,7 +61,9 @@ public class DetailActivity extends AppCompatActivity {
 
                 mCompositeDisposable.add(observable__UsrArticle__doDeleteArticleResultData.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(resultData -> {
                     Toast.makeText(getApplicationContext(), id + "번 글이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-                    finish();
+                    Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 }, throwable -> {
                     Toast.makeText(getApplicationContext(), "오류발생", Toast.LENGTH_SHORT).show();
                     Log.e(TAG, throwable.getMessage(), throwable);
