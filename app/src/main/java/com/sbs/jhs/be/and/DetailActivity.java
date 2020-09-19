@@ -63,7 +63,7 @@ public class DetailActivity extends AppCompatActivity {
                     int deletedId = Util.getAsInt(resultData.body.get("id"));
 
                     Toast.makeText(getApplicationContext(), deletedId + "번 글이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+                    Intent intent = new Intent(DetailActivity.this, ListActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }, throwable -> {

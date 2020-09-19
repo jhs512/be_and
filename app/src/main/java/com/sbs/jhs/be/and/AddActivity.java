@@ -28,6 +28,8 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
+        setTitle("게시물 추가");
+
         editTextTitle = findViewById(R.id.activity_add__editTextTitle);
         editTextBody = findViewById(R.id.activity_add__editTextBody);
         buttonDoAdd = findViewById(R.id.activity_add__buttonDoAdd);
@@ -60,7 +62,7 @@ public class AddActivity extends AppCompatActivity {
                 int id = Util.getAsInt(resultData.body.get("id"));
 
                 Toast.makeText(getApplicationContext(), id + "번 글이 생성되었습니다.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(AddActivity.this, MainActivity.class);
+                Intent intent = new Intent(AddActivity.this, ListActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }, throwable -> {
@@ -69,7 +71,5 @@ public class AddActivity extends AppCompatActivity {
             }));
 
         });
-
-        setTitle("게시물 추가");
     }
 }

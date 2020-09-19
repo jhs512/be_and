@@ -22,4 +22,7 @@ public interface BeApiService {
 
     @POST("/usr/article/doModifyArticle")
     Observable<ResultData<Map<String, Object>>> UsrArticle__doModifyArticle(@Query("id") int id, @Query("title") String title, @Query("body") String body);
+
+    @POST("/usr/member/doLogin")
+    Observable<ResultData<Map<String, Object>>> UsrMember__doLogin(@Query("loginId") String loginId, @Query("loginPw") String loginPw);
 }
