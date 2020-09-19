@@ -31,6 +31,11 @@ public class LoginActivity extends AppCompatActivity {
 
         setTitle("로그인");
 
+        if ( AppDatabase.isLogined() ) {
+            moveToList();
+            return;
+        }
+
         editTextLoginId = findViewById(R.id.activity_login__loginId);
         editTextLoginPw = findViewById(R.id.activity_login__loginPw);
         buttonDoLogin = findViewById(R.id.activity_login__buttonDoLogin);
@@ -63,11 +68,11 @@ public class LoginActivity extends AppCompatActivity {
                 if (resultData.isSuccess()) {
                     String authKey = (String) resultData.body.get("authKey");
 
-                    Toast.makeText(getApplicationContext(), "인증키(" + authKey + ")를 발급 받았습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), resultData.msg, Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(LoginActivity.this, ListActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    startActivity(intent);
+                    AppDatabase.saveLoginAuthKey(authKey);
+
+                    moveToList();
                 } else {
                     Toast.makeText(getApplicationContext(), resultData.msg, Toast.LENGTH_SHORT).show();
 
@@ -83,5 +88,11 @@ public class LoginActivity extends AppCompatActivity {
             }));
 
         });
+    }
+
+    private void moveToList() {
+        Intent intent = new Intent(LoginActivity.this, ListActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
     }
 }
