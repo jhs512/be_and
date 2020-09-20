@@ -31,13 +31,13 @@ public class LoginActivity extends AppCompatActivity {
 
         setTitle("로그인");
 
-        if ( AppDatabase.isLogined() ) {
+        if (AppDatabase.isLogined()) {
             moveToList();
             return;
         }
 
-        editTextLoginId = findViewById(R.id.activity_login__loginId);
-        editTextLoginPw = findViewById(R.id.activity_login__loginPw);
+        editTextLoginId = findViewById(R.id.activity_login__editTextLoginId);
+        editTextLoginPw = findViewById(R.id.activity_login__editTextLoginPw);
         buttonDoLogin = findViewById(R.id.activity_login__buttonDoLogin);
         buttonJoin = findViewById(R.id.activity_login__buttonJoin);
 
