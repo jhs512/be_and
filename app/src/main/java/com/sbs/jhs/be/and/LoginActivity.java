@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 
         setTitle("로그인");
 
-        if (AppDatabase.isLogined()) {
+        if (App.isLogined()) {
             moveToList();
             return;
         }
@@ -71,11 +71,12 @@ public class LoginActivity extends AppCompatActivity {
 
             mCompositeDisposable.add(observable__UsrMember__doLoginResultData.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(resultData -> {
                 if (resultData.isSuccess()) {
+                    String loginIdInResultDataBody = (String) resultData.body.get("loginId");
                     String authKey = (String) resultData.body.get("authKey");
 
                     Toast.makeText(getApplicationContext(), resultData.msg, Toast.LENGTH_SHORT).show();
 
-                    AppDatabase.saveLoginAuthKey(authKey);
+                    App.login(loginIdInResultDataBody, authKey);
 
                     moveToList();
                 } else {
@@ -97,7 +98,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void moveToList() {
         Intent intent = new Intent(LoginActivity.this, ListActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 }

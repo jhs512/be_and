@@ -4,18 +4,10 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class AppDatabase {
     private static Application application;
     private static SharedPreferences sp;
     private static SharedPreferences.Editor spEditor;
-    private static List<String> todos;
-
-    static {
-        todos = new ArrayList<>();
-    }
 
     public static void init(Application application) {
         AppDatabase.application = application;
@@ -23,8 +15,8 @@ public class AppDatabase {
         spEditor = sp.edit();
     }
 
-    public static void saveLoginAuthKey(String authKey) {
-        spEditor.putString("loginAuthKey", authKey);
+    public static void saveLoginAuthKey(String loginAuthKey) {
+        spEditor.putString("loginAuthKey", loginAuthKey);
         spEditor.commit();
     }
 
@@ -32,12 +24,22 @@ public class AppDatabase {
         return sp.getString("loginAuthKey", "");
     }
 
-    public static boolean isLogined() {
-        return getLoginAuthKey().equals("") == false;
-    }
-
     public static void removeLoginAuthKey() {
         spEditor.remove("loginAuthKey");
+        spEditor.commit();
+    }
+
+    public static void saveLoginId(String loginId) {
+        spEditor.putString("loginId", loginId);
+        spEditor.commit();
+    }
+
+    public static String getLoginId() {
+        return sp.getString("loginId", "");
+    }
+
+    public static void removeLoginId() {
+        spEditor.remove("loginId");
         spEditor.commit();
     }
 }

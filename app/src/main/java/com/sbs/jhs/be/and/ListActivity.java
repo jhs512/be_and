@@ -76,7 +76,6 @@ public class ListActivity extends AppCompatActivity {
 
     private void moveToLogin() {
         Intent intent = new Intent(ListActivity.this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 

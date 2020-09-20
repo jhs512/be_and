@@ -14,4 +14,13 @@ public class App {
 
         return retrofit.create(BeApiService.class);
     }
+
+    public static boolean isLogined() {
+        return AppDatabase.getLoginAuthKey().equals("") == false;
+    }
+
+    public static void login(String loginId, String loginAuthKey) {
+        AppDatabase.saveLoginId(loginId);
+        AppDatabase.saveLoginAuthKey(loginAuthKey);
+    }
 }
