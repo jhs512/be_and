@@ -41,6 +41,11 @@ public class LoginActivity extends AppCompatActivity {
         buttonDoLogin = findViewById(R.id.activity_login__buttonDoLogin);
         buttonJoin = findViewById(R.id.activity_login__buttonJoin);
 
+        buttonJoin.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginActivity.this, JoinActivity.class);
+            startActivity(intent);
+        });
+
         BeApiService beApiService = App.getBeApiService();
 
         buttonDoLogin.setOnClickListener(view -> {

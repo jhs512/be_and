@@ -25,4 +25,7 @@ public interface BeApiService {
 
     @POST("/usr/member/doLogin")
     Observable<ResultData<Map<String, Object>>> UsrMember__doLogin(@Query("loginId") String loginId, @Query("loginPw") String loginPw);
+
+    @POST("/usr/member/doJoin")
+    Observable<ResultData<Map<String, Object>>> UsrMember__doJoin(@Query("loginId") String loginId, @Query("loginPw") String loginPw, @Query("name") String name, @Query("nickname") String nickname);
 }
