@@ -16,7 +16,7 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
     private static final String TAG = "LoginActivity";
     private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
     private EditText editTextLoginId;
@@ -98,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void moveToList() {
         Intent intent = new Intent(LoginActivity.this, ListActivity.class);
+        intent.putExtra("boardId", 1);
         startActivity(intent);
     }
 }

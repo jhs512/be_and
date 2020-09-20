@@ -22,20 +22,23 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class ListActivity extends AppCompatActivity {
+public class ListActivity extends BaseActivity {
     private static final String TAG = "ListActivity";
     private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
     private List<Article> articles;
     private RecyclerView1Adapter recyclerView1Adapter;
     private Button btnAdd;
     private Button btnDoLogout;
+    private int boardId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        setTitle("게시물 리스트");
+        boardId = getIntent().getIntExtra("boardId", 0);
+
+        setTitle(boardId + "번 게시판, 게시물 리스트");
 
         btnDoLogout = findViewById(R.id.activity_list__btnDoLogout);
 
@@ -47,13 +50,15 @@ public class ListActivity extends AppCompatActivity {
 
         btnAdd = findViewById(R.id.activity_list__btnAdd);
         btnAdd.setOnClickListener(view -> {
-            startActivity(new Intent(ListActivity.this, AddActivity.class));
+            Intent intent = new Intent(ListActivity.this, AddActivity.class);
+            intent.putExtra("boardId", boardId);
+            startActivity(intent);
         });
 
         articles = new ArrayList<>();
 
         BeApiService beApiService = App.getBeApiService();
-        Observable<ResultData<BeApi__UsrArticle__getArticles__Body>> observable__UsrArticle__getArticlesResultData = beApiService.UsrArticle__getArticles();
+        Observable<ResultData<BeApi__UsrArticle__getArticles__Body>> observable__UsrArticle__getArticlesResultData = beApiService.UsrArticle__getArticles(App.getLoginAuthKey(), boardId);
 
         mCompositeDisposable.add(observable__UsrArticle__getArticlesResultData.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(resultData -> {
             for (Article article : resultData.body.articles) {
@@ -126,6 +131,7 @@ public class ListActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(ListActivity.this, DetailActivity.class);
                     intent.putExtra("id", id);
+                    intent.putExtra("boardId", boardId);
                     startActivity(intent);
                 });
             }

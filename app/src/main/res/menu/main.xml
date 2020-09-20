@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menuItemGoToNoticeList"
+        android:title="공지사항"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menuItemGoToFreeList"
+        android:title="자유게시판"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menuItemGoToLogin"
+        android:title="로그인"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menuItemGoToJoin"
+        android:title="로그인"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menuItemDoLogout"
+        android:title="로그아웃"
+        app:showAsAction="ifRoom" />
+</menu>

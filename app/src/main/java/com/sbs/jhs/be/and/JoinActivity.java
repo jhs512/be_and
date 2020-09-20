@@ -16,7 +16,7 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class JoinActivity extends AppCompatActivity {
+public class JoinActivity extends BaseActivity {
 
     private static final String TAG = "JoinActivity";
     private CompositeDisposable mCompositeDisposable = new CompositeDisposable();

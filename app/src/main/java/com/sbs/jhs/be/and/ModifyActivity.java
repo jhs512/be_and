@@ -17,7 +17,7 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class ModifyActivity extends AppCompatActivity {
+public class ModifyActivity extends BaseActivity {
     private static final String TAG = "ModifyActivity";
     private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
     private TextView textViewId;
@@ -43,7 +43,7 @@ public class ModifyActivity extends AppCompatActivity {
 
         BeApiService beApiService = App.getBeApiService();
 
-        Observable<ResultData<BeApi__UsrArticle__getArticle__Body>> observable__UsrArticle__getArticleResultData = beApiService.UsrArticle__getArticle(id);
+        Observable<ResultData<BeApi__UsrArticle__getArticle__Body>> observable__UsrArticle__getArticleResultData = beApiService.UsrArticle__getArticle(App.getLoginAuthKey(), id);
 
         mCompositeDisposable.add(observable__UsrArticle__getArticleResultData.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(resultData -> {
             Article article = resultData.body.article;
@@ -78,16 +78,17 @@ public class ModifyActivity extends AppCompatActivity {
                 return;
             }
 
-            Observable<ResultData<Map<String, Object>>> observable__UsrArticle__doModifyArticleResultData = beApiService.UsrArticle__doModifyArticle(id, title, body);
+            Observable<ResultData<Map<String, Object>>> observable__UsrArticle__doModifyArticleResultData = beApiService.UsrArticle__doModifyArticle(App.getLoginAuthKey(), id, title, body);
 
             mCompositeDisposable.add(observable__UsrArticle__doModifyArticleResultData.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(resultData -> {
-                int modifiedId = Util.getAsInt(resultData.body.get("id"));
+                if (resultData.isSuccess()) {
+                    int modifiedId = Util.getAsInt(resultData.body.get("id"));
 
-                Toast.makeText(getApplicationContext(), modifiedId + "번 글이 수정되었습니다.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ModifyActivity.this, DetailActivity.class);
-                intent.putExtra("id", id);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                    Toast.makeText(getApplicationContext(), resultData.msg, Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), resultData.msg, Toast.LENGTH_SHORT).show();
+                }
             }, throwable -> {
                 Toast.makeText(getApplicationContext(), "오류발생", Toast.LENGTH_SHORT).show();
                 Log.e(TAG, throwable.getMessage(), throwable);

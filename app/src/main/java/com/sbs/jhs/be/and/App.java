@@ -23,4 +23,13 @@ public class App {
         AppDatabase.saveLoginId(loginId);
         AppDatabase.saveLoginAuthKey(loginAuthKey);
     }
+
+    public static void logout() {
+        AppDatabase.removeLoginId();
+        AppDatabase.removeLoginAuthKey();
+    }
+
+    public static String getLoginAuthKey() {
+        return AppDatabase.getLoginAuthKey();
+    }
 }

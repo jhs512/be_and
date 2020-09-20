@@ -8,7 +8,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Map;
 
@@ -17,7 +16,7 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends BaseActivity {
     private static final String TAG = "DetailActivity";
     private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
     private TextView textViewId;
@@ -57,15 +56,17 @@ public class DetailActivity extends AppCompatActivity {
             builder.setTitle(id + "번 글을 삭제합니다.").setMessage("정말 삭제하시겠습니까?");
 
             builder.setPositiveButton("예", (dialog, viewId) -> {
-                Observable<ResultData<Map<String, Object>>> observable__UsrArticle__doDeleteArticleResultData = beApiService.UsrArticle__doDeleteArticle(id);
+                Observable<ResultData<Map<String, Object>>> observable__UsrArticle__doDeleteArticleResultData = beApiService.UsrArticle__doDeleteArticle(App.getLoginAuthKey(), id);
 
                 mCompositeDisposable.add(observable__UsrArticle__doDeleteArticleResultData.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(resultData -> {
-                    int deletedId = Util.getAsInt(resultData.body.get("id"));
+                    if (resultData.isSuccess()) {
+                        int deletedId = Util.getAsInt(resultData.body.get("id"));
 
-                    Toast.makeText(getApplicationContext(), deletedId + "번 글이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(DetailActivity.this, ListActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
+                        Toast.makeText(getApplicationContext(), resultData.msg, Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), resultData.msg, Toast.LENGTH_SHORT).show();
+                    }
                 }, throwable -> {
                     Toast.makeText(getApplicationContext(), "오류발생", Toast.LENGTH_SHORT).show();
                     Log.e(TAG, throwable.getMessage(), throwable);
@@ -78,7 +79,7 @@ public class DetailActivity extends AppCompatActivity {
             alertDialog.show();
         });
 
-        Observable<ResultData<BeApi__UsrArticle__getArticle__Body>> observable__UsrArticle__getArticleResultData = beApiService.UsrArticle__getArticle(id);
+        Observable<ResultData<BeApi__UsrArticle__getArticle__Body>> observable__UsrArticle__getArticleResultData = beApiService.UsrArticle__getArticle(App.getLoginAuthKey(), id);
 
         mCompositeDisposable.add(observable__UsrArticle__getArticleResultData.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(resultData -> {
             Article article = resultData.body.article;
